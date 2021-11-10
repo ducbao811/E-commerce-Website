@@ -1,15 +1,17 @@
 .checkout {
-    background-color: white;
+    background-color: inherit;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding: 20px;
     height: max-content;
     margin-top: 56px;
 }
 
 .checkout_title {
+    font: 20px;
+    font-weight: bold;
     margin-right: 10px;
     padding: 10px;
-    border-bottom: 2px solid lightblue;
+    border-bottom: 1px solid gray;
 }
 

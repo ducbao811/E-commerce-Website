@@ -1,7 +1,7 @@
 import React from "react";
 import "./CheckoutProduct.css";
 import {AddShoppingCart, Delete} from "@material-ui/icons";
-import {useStateValue} from "../StateProvider";
+import {useStateValue} from "../../StateProvider";
 import {Button, IconButton} from "@material-ui/core";
 import {ButtonGroup} from "@mui/material";
 
@@ -31,6 +31,7 @@ export default function CheckoutProduct({id, image, title, price, count}){
                 title: title,
                 image: image,
                 price: price,
+                count: 1
             }
         })
     }

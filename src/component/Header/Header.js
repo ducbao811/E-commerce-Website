@@ -1,6 +1,6 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import {useStateValue} from "../StateProvider";
+import {Link, useHistory} from "react-router-dom";
+import {useStateValue} from "../../StateProvider";
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -59,8 +59,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Header() {
 
-    const [{basket}, dispatch] = useStateValue();
+    const [{basket}] = useStateValue();
     const classes = useStyles();
+    const [searchTerm, setSearchTerm] = React.useState('');
+    let history = useHistory();
+
+    const onSearchSubmit = (e) => {
+        if (e.key === 'Enter') {
+            history.push("/search/" + searchTerm);
+        }
+    }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -76,7 +84,7 @@ export default function Header() {
                         to={'/'}
                         className={classes.title}
                     >
-                        MiShop
+                        BQLStore
                     </Typography>
                     <Box
                         sx={{
@@ -91,22 +99,33 @@ export default function Header() {
                             noWrap
                             fontFamily={"Roboto"}
                             component={Link}
-                            to={'/men'}
+                            to={'/productList/category/clothing'}
                             className={classes.title}
                             sx={{ display: { xs: 'none', sm: 'block' } }}
                         >
-                            Men
+                            Clothing
                         </Typography>
                         <Typography
                             variant="h6"
                             noWrap
                             fontFamily={"Roboto"}
                             component={Link}
-                            to={'/women'}
+                            to={'/productList/category/accessories'}
                             className={classes.title}
                             sx={{ display: { xs: 'none', sm: 'block' } }}
                         >
-                            Women
+                            Accessories
+                        </Typography>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            fontFamily={"Roboto"}
+                            component={Link}
+                            to={'/productList/category/shoes'}
+                            className={classes.title}
+                            sx={{ display: { xs: 'none', sm: 'block' } }}
+                        >
+                            Shoes
                         </Typography>
                         <Typography
                             variant="h6"
@@ -146,13 +165,15 @@ export default function Header() {
                         >
                             <AccountCircle />
                         </IconButton>
-                        <Search>
+                        <Search onKeyUp={onSearchSubmit}>
                             <SearchIconWrapper>
-                                <SearchIcon />
+                                <SearchIcon/>
                             </SearchIconWrapper>
                             <StyledInputBase
                                 placeholder="Search…"
                                 inputProps={{ 'aria-label': 'search' }}
+                                value={searchTerm}
+                                onChange={(event) => { setSearchTerm(event.target.value) }}
                             />
                         </Search>
                     </Box>

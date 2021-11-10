@@ -5,13 +5,13 @@ export const initialState = {
 const reducer = (state, action) => {
   switch (action.type){
     case 'ADD_TO_BASKET': {
+      // console.log(state.basket)
       const index = state.basket.findIndex(e => e.id === action.item.id);
       let newBasket = [...state.basket];
       if (index >= 0) {
-        newBasket[index].count += 1;
+        newBasket[index].count += action.item.count;
       } else {
         let newItem = action.item;
-        newItem.count = 1;
         newBasket.push(newItem)
       }
       return {
@@ -24,12 +24,25 @@ const reducer = (state, action) => {
         ...state,
         basket: state.basket.filter(item => item.id !== action.id)
       };
+    case 'REMOVE_ALL':
+      {
+        let newBasket = [];
+        return {
+          ...state,
+          basket: newBasket
+        };
+      }
     case 'REMOVE_ONE_FROM_BASKET':
     {
       const index = state.basket.findIndex(e => e.id === action.id);
       let newBasket = [...state.basket];
-      if (index >= 0) {
-        newBasket[index].count -= 1;
+        if (index >= 0) {
+          if (newBasket[index].count === 1) {
+            newBasket = newBasket.filter(item => item.id !== action.id);
+          }
+          else {
+            newBasket[index].count -= 1;
+          }
       } else {
         console.log("There is no item with this id")
       }

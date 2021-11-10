@@ -21,4 +21,15 @@ export default makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
+
+    title: {
+        marginTop: "5em",
+        marginBottom: "5em",
+        display: 'block',
+        justifyContent: 'center',
+        textAlign: 'center',
+    },
+    barstyle: {
+        justifyContent: 'center'
+    }
 }));

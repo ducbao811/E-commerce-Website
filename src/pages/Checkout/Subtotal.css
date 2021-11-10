@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100px;
-    padding: 20px;
     background-color: #f3f3f3;
     border: 1px solid #dddddd;
     border-radius: 3px;
@@ -14,9 +13,6 @@
     align-items: center;
 }
 
-.subtotal_gift > input {
-    margin-right: 5px;
-}
 
 .subtotal > button {
     background: #100f0f;
